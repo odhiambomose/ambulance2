@@ -2,6 +2,7 @@ import { View,Text,StyleSheet,TouchableOpacity,TextInput ,Image} from "react-nat
 import React, {useState} from "react";
 import { firebase } from "../../config";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+// import GoogleScreen from "./GoogleScreen";
 const LoginScreen=({navigation})=>{
     const [email,setEmail]= useState("")
     const [password,setPassword]=useState("")
@@ -9,16 +10,26 @@ loginUser= async(email, password)=>{
     try {
        await firebase.auth().signInWithEmailAndPassword(email,password)
     //    navigation.navigate("Home")
+    alert("successfully loged in")
     } catch (error) {
       alert(error.message)
     }
 }
     return(
+
+
+        
         <View style={styles.container}>
+<View>
+<Image
+        style={styles.stretch}
+        source={require('../../assets/ambulance.png')}
+      />
+</View>
+
         <KeyboardAwareScrollView
             style={{ flex: 1, width: '100%' }}
             keyboardShouldPersistTaps="always">
-{/* <Image source={require("../../assets/Humaaans.png")} style ={styles.img}/> */}
             <TextInput
                 style={styles.input}
                 placeholder='E-mail'
@@ -44,6 +55,9 @@ loginUser= async(email, password)=>{
             <View style={styles.footerView}>
                 <Text style={styles.footerText}>Don't have an account? <Text onPress={()=>navigation.navigate("Register")} style={styles.footerLink}>Sign up</Text></Text>
             </View>
+
+          
+           
         </KeyboardAwareScrollView>
     </View>
     )
@@ -103,10 +117,13 @@ const styles=StyleSheet.create({
         fontWeight: "bold",
         fontSize: 16
     },
-//     img:{
-//         width:"100%",
-//         borderRadius: 5,
-//         height: "100%",
-//         marginTop:5
-//     }
+
+    stretch: {
+        width: 200,
+        height: 150,
+        color:"#EC0921",
+        marginTop:30
+
+      },
+
  })

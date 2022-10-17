@@ -40,7 +40,7 @@ const [color,setColor]=useState("")
     <View >
 
       <View  style={styles.block}>
-      <Text style={{textAlign:"center",margin:0,fontSize:30,paddingBottom:12,color:color}}>Register Ambulance</Text>
+      <Text style={{textAlign:"center",margin:0,fontSize:30,paddingBottom:12,color:"white"}}>Register Ambulance</Text>
       </View>
 
 

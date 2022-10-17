@@ -56,6 +56,16 @@ export default function RegisterScreen({ navigation }) {
   };
   return (
     <View style={styles.container}>
+
+     
+
+<View>
+<Image
+        style={styles.stretch}
+        source={require('../../assets/ambulance.png')}
+      />
+</View>
+
       <KeyboardAwareScrollView
         style={{ flex: 1, width: "100%" }}
         keyboardShouldPersistTaps="always"
@@ -157,5 +167,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
   },
+  stretch: {
+    width: 200,
+    height: 150,
+    color:"#EC0921",
+    marginTop:30
+
+  },
+
+  
+ 
 
 })

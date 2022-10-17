@@ -43,7 +43,7 @@ useEffect(()=>{
                 <TouchableOpacity
           style={styles.button}
         >
-          <Text style={styles.buttonTitle}>Book Know</Text>
+          <Text style={styles.buttonTitle}>Book Now</Text>
         </TouchableOpacity>
 
 
