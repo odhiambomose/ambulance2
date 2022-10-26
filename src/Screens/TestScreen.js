@@ -12,21 +12,21 @@ onDone={()=>navigation.navigate("home")}
 
   pages={[
     {
-      backgroundColor: '#EC0921',
-      image: <Image source={require('../../assets/ambulance.png')} style={styles.caro} />,
-      title: 'Onboarding',
-      subtitle: 'Done with React Native Onboarding Swiper',
+      backgroundColor: '#fff',
+      image: <Image source={require('../../assets/care1.png')} style={styles.caro} />,
+      title: 'Service',
+      subtitle: 'We offer 24/7 service to our users in Kenya',
     },
 
     {
-        backgroundColor: '#EC0921',
-        image: <Image source={require('../../assets/ambulance.png')} style={styles.caro} />,
+        backgroundColor: '#fff',
+        image: <Image source={require('../../assets/location.png')} style={styles.caro} />,
         title: 'Onboarding',
         subtitle: 'Done with React Native Onboarding Swiper',
       },
       {
-        backgroundColor: '#EC0921',
-        image: <Image source={require('../../assets/ambulance.png')} style={styles.caro} />,
+        backgroundColor: '#fff',
+        image: <Image source={require('../../assets/service.png')} style={styles.caro} />,
         title: 'Onboarding',
         subtitle: 'Done with React Native Onboarding Swiper',
       },
@@ -40,8 +40,8 @@ onDone={()=>navigation.navigate("home")}
 
 const styles=StyleSheet.create({
 caro:{
-    width: 200,
-    height: 150,
+    width: 270,
+    height: 240,
 }
 })
 

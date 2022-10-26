@@ -9,6 +9,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 
 
+
+
 // import HomeScreen from './src/Screens/HomeScreen';
 import ProfileScreen from './src/Screens/ProfileScreen';
 import SettingScreen from './src/Screens/SettingScreen';
@@ -21,6 +23,7 @@ import HomeScreen from './src/Screens/HomeScreen';
 import SearchBar from './src/Screens/SearchBar';
 import IntroScreen from './src/Screens/IntroScreen';
 import TestScreen from './src/Screens/TestScreen';
+import FirstAidScreen from './src/Screens/FirstAidScreen';
 
 
 const Drawer = createDrawerNavigator();
@@ -30,12 +33,12 @@ const Drawer = createDrawerNavigator();
         <Drawer.Navigator>
         <Drawer.Screen name="Home" component={HomeScreen} />
         {/* <Drawer.Screen name="profile" component={ProfileScreen} /> */}
-        <Drawer.Screen name="settings" component={SettingScreen} />
+        {/* <Drawer.Screen name="settings" component={SettingScreen} /> */}
         <Drawer.Screen name="register" component={RegisterScreen} />
         <Drawer.Screen name="profile" component={ProfileScreen} />
 
         <Drawer.Screen name="Login" component={LoginScreen} />
-        <Drawer.Screen name="place" component={SearchBar} />
+        <Drawer.Screen name="First Aid" component={FirstAidScreen} />
 
         <Drawer.Screen name="Booking" component={BookingScreen} />
         <Drawer.Screen name="registerhistory" component={RegisterationHistory} />
@@ -46,6 +49,10 @@ const Drawer = createDrawerNavigator();
 
   );
 }
+
+
+
+
 
 
 

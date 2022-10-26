@@ -1,16 +1,15 @@
-import * as React from 'react';
-import { Button, View } from 'react-native';
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import HomeScreen from './HomeScreen';
 
+// const Tab = createBottomTabNavigator();
 
-function SettingScreen() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Button
-        //   onPress={() => navigation.navigate('setting')}
-          title="Go to notifications"
-        />
-      </View>
-    );
-  }
+// function MyTabs() {
+//   return (
+//     <Tab.Navigator screenOptions={{headerShown:false}}>
+//       <Tab.Screen name="Home" component={HomeScreen} />
+//       {/* <Tab.Screen name="Settings" component={SettingsScreen} /> */}
+//     </Tab.Navigator>
+//   );
+// }
 
-  export default SettingScreen
+// export default MyTabs

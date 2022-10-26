@@ -2,8 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import {GoogleAuthProvider, getAuth} from "firebase/auth"
 
-// TODO: Replace the following with your app's Firebase project configuration
-// See: https://firebase.google.com/docs/web/learn-more#config-object
+
 const firebaseConfig = {
     apiKey: "AIzaSyAzeD4vAxUk6Z32btpXxODMZ9765Y_eZNA",
     authDomain: "otptest-6d798.firebaseapp.com",
