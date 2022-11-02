@@ -1,72 +1,79 @@
-import { View,Text,StyleSheet,TouchableOpacity,TextInput ,Image} from "react-native";
-import React, {useState} from "react";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from "react-native";
+import React, { useState } from "react";
 import { firebase } from "../../config";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 // import GoogleScreen from "./GoogleScreen";
-const LoginScreen=({navigation})=>{
-    const [email,setEmail]= useState("")
-    const [password,setPassword]=useState("")
-loginUser= async(email, password)=>{
-    try {
-       await firebase.auth().signInWithEmailAndPassword(email,password)
-    //    navigation.navigate("Home")
-    alert("successfully loged in")
-    } catch (error) {
-      alert(error.message)
+const LoginScreen = ({ navigation }) => {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const loginUser = async (email, password) => {
+        try {
+            await firebase.auth().signInWithEmailAndPassword(email, password)
+            //    navigation.navigate("Home")
+            alert("successfully loged in")
+        } catch (error) {
+            alert(error.message)
+        }
     }
-}
-    return(
+    return (
+
+        // <View>
+
+            <View style={styles.container}>
+                <View style={styles.login} >
+                        <Text style={{color:"white"}}>WELCOME BACK...</Text>
+                    </View>
+                <View>
+                    <Image
+                        style={styles.stretch}
+                        source={require('../../assets/splash1.png')}
+                    />
+                </View>
 
 
-        
-        <View style={styles.container}>
-<View>
-<Image
-        style={styles.stretch}
-        source={require('../../assets/ambulance.png')}
-      />
-</View>
 
-        <KeyboardAwareScrollView
-            style={{ flex: 1, width: '100%' }}
-            keyboardShouldPersistTaps="always">
-            <TextInput
-                style={styles.input}
-                placeholder='E-mail'
-                placeholderTextColor="#AAAAAA"
-                onChangeText={(text) => setEmail(text)}
-                underlineColorAndroid="transparent"
-                autoCapitalize="none"
-            />
-            <TextInput
-                style={styles.input}
-                placeholderTextColor="#AAAAAA"
-                secureTextEntry
-                placeholder='Password'
-                onChangeText={(text) => setPassword(text)}
-                underlineColorAndroid="transparent"
-                autoCapitalize="none"
-            />
-            <TouchableOpacity
-                style={styles.button}
-                onPress={() => loginUser(email,password)}>
-                <Text style={styles.buttonTitle}>Log in</Text>
-            </TouchableOpacity>
-            <View style={styles.footerView}>
-                <Text style={styles.footerText}>Don't have an account? <Text onPress={()=>navigation.navigate("Register")} style={styles.footerLink}>Sign up</Text></Text>
+                <KeyboardAwareScrollView
+                    style={{ flex: 1, width: '100%' }}
+                    keyboardShouldPersistTaps="always">
+                    <TextInput
+                        style={styles.input}
+                        placeholder='E-mail'
+                        placeholderTextColor="#AAAAAA"
+                        onChangeText={(text) => setEmail(text)}
+                        underlineColorAndroid="transparent"
+                        autoCapitalize="none"
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholderTextColor="#AAAAAA"
+                        secureTextEntry
+                        placeholder='Password'
+                        onChangeText={(text) => setPassword(text)}
+                        underlineColorAndroid="transparent"
+                        autoCapitalize="none"
+                    />
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => loginUser(email, password)}>
+                        <Text style={styles.buttonTitle}>Log in</Text>
+                    </TouchableOpacity>
+                    <View style={styles.footerView}>
+                        <Text style={styles.footerText}>Don't have an account? <Text onPress={() => navigation.navigate("Register")} style={styles.footerLink}>Sign up</Text></Text>
+                    </View>
+
+
+
+                </KeyboardAwareScrollView>
             </View>
-
-          
-           
-        </KeyboardAwareScrollView>
-    </View>
+        // </View>
     )
 }
 export default LoginScreen;
-const styles=StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        position:"relative"
     },
     title: {
     },
@@ -121,9 +128,25 @@ const styles=StyleSheet.create({
     stretch: {
         width: 200,
         height: 150,
-        color:"#EC0921",
-        marginTop:30
+        color: "#EC0921",
+        marginTop: 95
 
-      },
+    },
+    login:{
+        backgroundColor:"#EC0921",
+        height:"6%",
+        // width:"15%",
+        paddingTop:6,
+paddingBottom:6,
+paddingLeft:6,
+paddingRight:85,
+marginTop:7,
+position:"absolute",
+left:0,
+marginBottom:20,
+borderBottomRightRadius:4,
+borderTopRightRadius:4
 
- })
+    }
+
+})

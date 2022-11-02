@@ -5,7 +5,7 @@ import { addDoc, collection } from "firebase/firestore";
 
 
 const BookingScreen = () => {
-
+const [mpesaData,setMpesaData]=useState("")
 const [message,setMessage]=useState("")
 const [color,setColor]=useState("")
   const [formData,setFormData]=useState({
@@ -17,6 +17,8 @@ const [color,setColor]=useState("")
     phoneNo:""
 
   })
+
+  // const url=
 
 
   async function Register(){

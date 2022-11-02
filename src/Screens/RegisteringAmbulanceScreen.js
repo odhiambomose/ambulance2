@@ -11,10 +11,8 @@ const [color,setColor]=useState("")
   const [formData,setFormData]=useState({
 
     patientsName:"",
-    patientsGender:"",
-    patientsbloodgroup:"",
-    insuranceNo:"",
-    phoneNo:""
+     phone:"",
+     amount:""
 
   })
 
@@ -29,10 +27,22 @@ const [color,setColor]=useState("")
       console.error("Error adding document: ", e);
     }
   
-  }
-
-
+    const url = "https://mpesa.onrender.com/api/stk/push"
   
+    const options={
+  method:"POST",
+  headers:{"Content-Type":"application/json"},
+  body:JSON.stringify(formData)
+     }
+       fetch(url,options)
+     .then(res=>res.json())
+     .then(data=>data)
+  
+  
+     .catch(error=>{
+      console.log(error)
+  })
+  }
 
 
   return (
@@ -63,37 +73,17 @@ const [color,setColor]=useState("")
           style={styles.input}
           placeholderTextColor="#AAAAAA"
           
-          placeholder="Patients Gender"
+          placeholder="amont"
           underlineColorAndroid="transparent"
           autoCapitalize="none"
           onChange={(e)=>console.log(e.target)}
-          onChangeText={(text)=>setFormData(prev=>({...prev,patientsGender:text}))}
+          onChangeText={(text)=>setFormData(prev=>({...prev,amount:text}))}
 
 
 
         />
-        <TextInput
-          style={styles.input}
-          placeholderTextColor="#AAAAAA"
-        
-          placeholder="Patients Blood Group"
-          underlineColorAndroid="transparent"
-          autoCapitalize="none"
-          onChangeText={(text)=>setFormData(prev=>({...prev,patientsbloodgroup:text}))}
-
-
-        />
-        <TextInput
-          style={styles.input}
-          placeholderTextColor="#AAAAAA"
-          
-          placeholder="Medical insurance number"
-          underlineColorAndroid="transparent"
-          autoCapitalize="none"
-          onChangeText={(text)=>setFormData(prev=>({...prev,insuranceNo:text}))}
-
-
-        />
+      
+      
         <TextInput
           style={styles.input}
           placeholderTextColor="#AAAAAA"
@@ -101,7 +91,7 @@ const [color,setColor]=useState("")
           placeholder="Phone Number"
           underlineColorAndroid="transparent"
           autoCapitalize="none"
-          onChangeText={(text)=>setFormData(prev=>({...prev,phoneNo:text}))}
+          onChangeText={(text)=>setFormData(prev=>({...prev,phone:text}))}
 
 
         />
@@ -111,7 +101,7 @@ const [color,setColor]=useState("")
           style={styles.button}
           onPress={Register}
         >
-          <Text style={styles.buttonTitle}>Proceed to Payment</Text>
+          <Text style={styles.buttonTitle}>Book</Text>
         </TouchableOpacity>
 
 </View>
