@@ -20,10 +20,10 @@ import RegisterScreen from './src/Screens/RegisterScreen';
 import RegisterationHistory from './src/Screens/RegisterationHistory';
 import RegisteringAmbulanceScreen from './src/Screens/RegisteringAmbulanceScreen';
 import HomeScreen from './src/Screens/HomeScreen';
-import SearchBar from './src/Screens/SearchBar';
 import IntroScreen from './src/Screens/IntroScreen';
 import TestScreen from './src/Screens/TestScreen';
 import FirstAidScreen from './src/Screens/FirstAidScreen';
+import GooglePlacesInput from './src/Screens/GooglePlacesInput';
 
 
 const Drawer = createDrawerNavigator();
@@ -39,6 +39,8 @@ const Drawer = createDrawerNavigator();
 
         <Drawer.Screen name="Login" component={LoginScreen} />
         <Drawer.Screen name="First Aid" component={FirstAidScreen} />
+        <Drawer.Screen name="Places" component={GooglePlacesInput} />
+
 
         <Drawer.Screen name="Booking" component={BookingScreen} />
         <Drawer.Screen name="registerhistory" component={RegisterationHistory} />

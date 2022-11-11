@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image ,ScrollView} from "react-native";
 import React, { useState } from "react";
 import { firebase } from "../../config";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -6,6 +6,8 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [isSecureEntry,setIsSecureEntry]=useState(true)
+
     const loginUser = async (email, password) => {
         try {
             await firebase.auth().signInWithEmailAndPassword(email, password)
@@ -32,7 +34,7 @@ const LoginScreen = ({ navigation }) => {
 
 
 
-                <KeyboardAwareScrollView
+                <ScrollView
                     style={{ flex: 1, width: '100%' }}
                     keyboardShouldPersistTaps="always">
                     <TextInput
@@ -43,15 +45,28 @@ const LoginScreen = ({ navigation }) => {
                         underlineColorAndroid="transparent"
                         autoCapitalize="none"
                     />
+                    <View>
                     <TextInput
                         style={styles.input}
                         placeholderTextColor="#AAAAAA"
-                        secureTextEntry
+                        secureTextEntry={isSecureEntry}
+
                         placeholder='Password'
                         onChangeText={(text) => setPassword(text)}
                         underlineColorAndroid="transparent"
                         autoCapitalize="none"
                     />
+<TouchableOpacity
+            onPress={()=>{
+              setIsSecureEntry((prev)=>!prev)
+            }}
+style={styles.touchable}
+            
+            >
+              <Text>{isSecureEntry?"Hide":"Show"}</Text>
+            </TouchableOpacity>
+
+                    </View>
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => loginUser(email, password)}>
@@ -63,7 +78,7 @@ const LoginScreen = ({ navigation }) => {
 
 
 
-                </KeyboardAwareScrollView>
+                </ScrollView>
             </View>
         // </View>
     )
@@ -147,6 +162,17 @@ marginBottom:20,
 borderBottomRightRadius:4,
 borderTopRightRadius:4
 
-    }
+    },
+    viewTouch:{
+        position:"relative"
+      
+      },
+      touchable:{
+        position:"absolute",
+        top:"35%",
+        
+        right:35,
+        
+      },
 
 })

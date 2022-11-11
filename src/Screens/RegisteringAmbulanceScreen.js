@@ -101,7 +101,7 @@ const [color,setColor]=useState("")
           style={styles.button}
           onPress={Register}
         >
-          <Text style={styles.buttonTitle}>Book</Text>
+          <Text style={styles.buttonTitle}>Book with Mpesa</Text>
         </TouchableOpacity>
 
 </View>

@@ -19,6 +19,7 @@ export default function RegisterScreen({ navigation }) {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loggedIn, setloggedIn] = useState(false);
   const [userInfo, setuserInfo] = useState([]);
+  const [isSecureEntry,setIsSecureEntry]=useState(true)
   const registerUser = async (email, password, fullName) => {
     await firebase
       .auth()
@@ -57,12 +58,14 @@ export default function RegisterScreen({ navigation }) {
   return (
     <View style={styles.container}>
 
-     
+<View style={styles.login} >
+                        <Text style={{color:"white"}}>PLEASE CREATE AN ACCOUNT...</Text>
+                    </View>
 
 <View>
 <Image
         style={styles.stretch}
-        source={require('../../assets/ambulance.png')}
+        source={require('../../assets/splash1.png')}
       />
 </View>
 
@@ -87,15 +90,28 @@ export default function RegisterScreen({ navigation }) {
           underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
+
+<View style={styles.viewTouch}>
         <TextInput
           style={styles.input}
           placeholderTextColor="#AAAAAA"
-          secureTextEntry
+          secureTextEntry={isSecureEntry}
+         
           placeholder="Password"
           onChangeText={(password) => setPassword(password)}
           underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
+    <TouchableOpacity
+            onPress={()=>{
+              setIsSecureEntry((prev)=>!prev)
+            }}
+style={styles.touchable}
+            
+            >
+              <Text>{isSecureEntry?"Hide":"Show"}</Text>
+            </TouchableOpacity>
+</View>
         <TouchableOpacity
           style={styles.button}
           onPress={() => registerUser(email, password, fullName)}
@@ -118,6 +134,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    position:"relative"
   },
   title: {},
   logo: {
@@ -171,9 +188,37 @@ const styles = StyleSheet.create({
     width: 200,
     height: 150,
     color:"#EC0921",
-    marginTop:30
+    marginTop: 95
 
   },
+  login:{
+    backgroundColor:"#EC0921",
+    height:"6%",
+    // width:"15%",
+    paddingTop:6,
+paddingBottom:6,
+paddingLeft:6,
+paddingRight:85,
+marginTop:7,
+position:"absolute",
+left:0,
+marginBottom:20,
+borderBottomRightRadius:4,
+borderTopRightRadius:4
+
+},
+touchable:{
+  position:"absolute",
+  top:"35%",
+  
+  right:35,
+  
+},
+viewTouch:{
+  position:"relative"
+
+}
+
 
   
  

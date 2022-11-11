@@ -5,7 +5,7 @@ import { db } from '../../firebase'
 
 
 
-const RegisterationHistory=()=> {
+const RegisterationHistory=({navigation})=> {
 
 const [fetchData,setFetchData]=useState([])
 
@@ -42,6 +42,7 @@ useEffect(()=>{
 
                 <TouchableOpacity
           style={styles.button}
+          onPress={()=>navigation.navigate("registerambulance")}
         >
           <Text style={styles.buttonTitle}>Book Now</Text>
         </TouchableOpacity>
