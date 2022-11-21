@@ -1,4 +1,6 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
+import Context, { CoordinatesContext } from './context';
+
 import {
   View,
   Text,
@@ -10,38 +12,58 @@ import {
   ImageBackground
 } from 'react-native';
 import axios from 'axios';
+import contex from "./context"
+import Bottom from './Bottom';
+const GooglaPlaceInput =({navigation})=> {
+  const API_KEY = 'pk.00229a6e525fb1b4b7b7be3176264338';
 
-const API_KEY = 'pk.00229a6e525fb1b4b7b7be3176264338';
-export default class GooglaPlaceInput extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchKeyword: '',
-      searchResults: [],
-      isShowingResults: false,
-    };
-  }
-  // =89277c01d90548d8abe6da673aace35f
-  searchLocation = async (text) => {
-    this.setState({searchKeyword: text});
-    axios
-      .request({
-        method: 'get',
-        url: `  https://api.locationiq.com/v1/autocomplete?key=${API_KEY}&q=${text}`,
-      })
-      .then((response) => {
-        console.log(response.data);
-        this.setState({
-          searchResults: response.data,
-          isShowingResults: true,
-        });
-      })
+  // h27GYP4718hRp  // h27GYP4718hRptt7g0fX1a66QGwtppAb
+// tt7g0fX1a66QGwtppAb
+
+  const {coords} = useContext(CoordinatesContext)
+  const [mapCoordinate,setMapCoordinate]=coords
+
+
+  const [search, setSearch] = useState({
+    searchKeyword:"",
+    searchKeyword:[],
+    isShowingResults:false
+  })
+
+  
+  // `http://www.mapquestapi.com/search/v3/prediction?key=${API_KEY}&limit=15&collection=adminArea&countryCode=KE&q=${text}`  
+  const searchLocation = async (text) => {
+    setSearch(prev=>({...prev, searchKeyword: text}));
+ 
+    fetch( `https://api.locationiq.com/v1/autocomplete?key=${API_KEY}&q=${text}`)
+      .then((response) => response.json())
+      .then(data=>setSearch(prev=>({...prev, searchResults: data, isShowingResults:true})))
+        
       .catch((e) => {
         console.log(e);
       });
   };
 
-  render() {
+  const onSearch=()=>{
+
+    search.searchResults.filter(item=>{
+      if(search.searchKeyword == item.display_name) {
+
+setMapCoordinate({
+  lat:item.lat,
+  lon:item.lon
+})
+
+navigation.navigate("Home")
+        
+      }
+    })
+    
+      console.log(search.searchKeyword)
+    
+  }
+
+  
     return (
 
       <SafeAreaView style={styles.container}>
@@ -60,23 +82,29 @@ export default class GooglaPlaceInput extends Component {
             returnKeyType="search"
             style={styles.searchBox}
             placeholderTextColor="#000"
-            onChangeText={(text) => this.searchLocation(text)}
-            value={this.state.searchKeyword}
+            onChangeText={(text) => searchLocation(text)}
+            value={search.searchKeyword}
+
           />
-          {this.state.isShowingResults && (
+          {search.isShowingResults && (
             <FlatList
-              data={this.state.searchResults}
+              data={search.searchResults}
               renderItem={({item, index}) => {
                 return (
                   <TouchableOpacity
                     style={styles.resultItem}
                     onPress={() =>
-                      this.setState({
-                        searchKeyword: item.address.display_name,
-                        isShowingResults: false,
-                      })
+                      setSearch(prev=>({
+                        ...prev,
+                        searchKeyword:item.display_name,
+                        isShowingResults:false
+                      }))
+                      
                     }>
                     <Text>{item.display_name}</Text>
+                    {
+                    
+                    }
                   </TouchableOpacity>
                 );
               }}
@@ -87,7 +115,8 @@ export default class GooglaPlaceInput extends Component {
 
 <TouchableOpacity
         style={styles.button}
-        onPress={()=>navigation.navigate("Places")}
+        onPress={onSearch}
+        
       >
         <Text style={styles.buttonTitle}>Search</Text>
       </TouchableOpacity>
@@ -96,9 +125,13 @@ export default class GooglaPlaceInput extends Component {
 
         <Text>mmmmm</Text>
         </View>
+
+        <View>
+          {/* <Bottom/> */}
+        </View>
       </SafeAreaView>
     );
-  }
+  
 }
 
 const styles = StyleSheet.create({
@@ -157,10 +190,13 @@ const styles = StyleSheet.create({
     height: 48,
     borderRadius: 5,
     alignItems: "center",
-    justifyContent: 'center'
+    justifyContent: 'center',
+    zIndex:-1
   },
 
   buttonTitle: {
     color: "white"
   }
 });
+
+export default GooglaPlaceInput

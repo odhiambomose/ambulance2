@@ -8,7 +8,7 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/ambucare.png",
-      "resizeMode": "300x300",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -18,16 +18,49 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ambulane2",
+      "config": {
+        "googleMapsApiKey": "AIzaSyC7UnImB2rPlkkjHWpZT8zGnfW82F-op9Y"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#FFFFFF",
+        "bundleIdentifier": "com.ambulane2",
+        "config": {
+          "googleMapsApiKey": "AIzaSyC7UnImB2rPlkkjHWpZT8zGnfW82F-op9Y"
+        }
+      },
+      "package": "com.ambulane2",
+      "config": {
+        "googleMaps": {
+          "apiKey": "KEY"
+        },
+        "permissions": [
+          "ACCESS_COARSE_LOCATION",
+          "ACCESS_FINE_LOCATION",
+          "FOREGROUND_SERVICE"
+        ]
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsImpl": "mapbox",
+          "RNMapboxMapsDownloadToken": "sk.eyJ1IjoibW9zZXNvZGhpYW1ibyIsImEiOiJjbGFtbG1xem8wOHJtM3JuMDA2eWhpNzE0In0.hSq70lOzXCu03u842Kr8Ag"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e183ad93-7ac4-4c90-8d5b-2d1b080ddd79"
+      }
     }
   }
 }

@@ -1,34 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext,useRef } from 'react';
 import { Platform, Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE,Polyline } from 'react-native-maps';
 import * as Location from 'expo-location';
-import MyTabs from './SettingScreen';
+import MapViewDirections from 'react-native-maps-directions';
 
-
+import {CoordinatesContext} from './context';
+// import { Item } from 'react-native-paper/lib/typescript/components/Drawer/Drawer';
 export default function HomeScreen({navigation}) {
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
+  const {coords} = useContext(CoordinatesContext)
+  const [mapCoordinate,setMapCoordinate]=coords
+  const [latlng,setLatLng] = useState({})
 
-  useEffect(() => {
-    (async () => {
-      
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
-        return;
-      }
+const checkPermission =async()=>{
+    const hasPermission = await Location.requestForegroundPermissionsAsync();
+    if(hasPermission.status === 'granted') {
+        const permission = await askPermission();
+        return permission
+    }
+    return true
+};
 
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    })();
-  }, []);
 
-  let text = 'Waiting..';
-  if (errorMsg) {
-    text = errorMsg;
-  } else if (location) {
-    text = JSON.stringify(location);
-  }
+const askPermission = async()=>{
+    const permission = await Location.requestForegroundPermissionsAsync()
+    return permission.status === 'granted';
+};
+
+
+const getLocation = async()=>{
+    try{
+        const {granted} =await Location.requestForegroundPermissionsAsync();
+        if(!granted)return;
+        const {
+            coords:{latitude,longitude},
+        } = await Location.getCurrentPositionAsync();
+        setLatLng({latitude:latitude,longitude:longitude})
+        // console.log(location)
+
+    }catch(err){
+
+    }
+}
+
+const _map = useRef(1);
+
+
+useEffect(()=>{
+    checkPermission();
+    getLocation()
+  //  console.log(latlng)
+,[]})
+
+// console.log(mapCoordinate)
+
+
+const origin = {latitude: latlng.latitude, longitude: latlng.longitude};
+const destination = {latitude:mapCoordinate.latitude, longitude: mapCoordinate.longitude};
+// const GOOGLE_MAPS_APIKEY = "nMgAZqbMED6hrHWGM2x6LR5stE3unx9U";
 
   return (
 
@@ -55,16 +83,26 @@ export default function HomeScreen({navigation}) {
 
        <MapView
         style={styles.map}
+        ref={_map}
           provider={PROVIDER_GOOGLE}
-        showsUserLocation
-         initialRegion={{
-      //    latitude:location !== null && location.coords.latitude,
-      //  longitude:location !== null && location.coords.longitude,
-      latitude:-1.3104579,
-      longitude:36.7932832,
-       latitudeDelta: 0.0922,
-         longitudeDelta: 0.0421}}
-      />
+          showsUserLocation ={true}
+          followsUserLocation = {true}
+          zoomEnabled={true}
+
+          initialRegion={{
+            latitude: latlng !==null && latlng.latitude,
+            longitude: latlng !==null && latlng.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+
+
+      
+      >
+
+{/* <Polyline strokeWidth={2} strokeColor="red" coordinates={destination}></Polyline> */}
+
+      </MapView>
 
 
     </View>

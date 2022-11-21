@@ -11,7 +11,7 @@ const LoginScreen = ({ navigation }) => {
     const loginUser = async (email, password) => {
         try {
             await firebase.auth().signInWithEmailAndPassword(email, password)
-            //    navigation.navigate("Home")
+               navigation.navigate("Home")
             alert("successfully loged in")
         } catch (error) {
             alert(error.message)

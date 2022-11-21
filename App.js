@@ -24,16 +24,19 @@ import IntroScreen from './src/Screens/IntroScreen';
 import TestScreen from './src/Screens/TestScreen';
 import FirstAidScreen from './src/Screens/FirstAidScreen';
 import GooglePlacesInput from './src/Screens/GooglePlacesInput';
-
+import Context from './src/Screens/context';
+import Bottom from './src/Screens/Bottom';
+import Tomtom from './src/Screens/Tomtom';
 
 const Drawer = createDrawerNavigator();
 
  function DrawerTab() {
   return (
+    <Context>
         <Drawer.Navigator>
         <Drawer.Screen name="Home" component={HomeScreen} />
-        {/* <Drawer.Screen name="profile" component={ProfileScreen} /> */}
-        {/* <Drawer.Screen name="settings" component={SettingScreen} /> */}
+        <Drawer.Screen name="bottom" component={Bottom} />
+        <Drawer.Screen name="Tom" component={Tomtom} />
         <Drawer.Screen name="register" component={RegisterScreen} />
         <Drawer.Screen name="profile" component={ProfileScreen} />
 
@@ -47,27 +50,18 @@ const Drawer = createDrawerNavigator();
         <Drawer.Screen name="registerambulance" component={RegisteringAmbulanceScreen} />
 
  </Drawer.Navigator>
+ </Context>
  
 
   );
 }
-
-
-
-
-
-
-
- 
-
-
-
-
 const Stack = createStackNavigator();
 
 const App=()=>{
 
 return(
+  <Context>
+
 <NavigationContainer >
 <Stack.Navigator screenOptions={{headerShown:false}} >
 
@@ -81,18 +75,10 @@ return(
     
     </Stack.Navigator>
 </NavigationContainer>
-
-
+</Context>
 
 )
-
-
-
-
 }
-
-
-
 
 export default App
 
